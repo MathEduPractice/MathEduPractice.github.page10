@@ -8,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-
 module.exports = {
   entry: {
     'assets/engine.js': [
@@ -21,11 +20,14 @@ module.exports = {
   },
   output: {
     filename: '[name]',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'docs'),
+    publicPath: './'
   },
   devtool: false,
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*', '!**/.gitkeep']
+    }),
     new ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
